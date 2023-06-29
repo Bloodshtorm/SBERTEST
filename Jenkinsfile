@@ -18,8 +18,7 @@ pipeline {
         echo "привет СБЕР, меня зовут ${ФИО} и я хочу у вас работать"
       }
     }
-
-    stage ('stage2'){
+    stage ('stage2') {
       input{
       message "Принять на работу?"
       }
