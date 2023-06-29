@@ -3,7 +3,7 @@ pipeline {
   
   agent any
   
-  enviroment{
+  environment{
     P_N = "trash"
   }
 
