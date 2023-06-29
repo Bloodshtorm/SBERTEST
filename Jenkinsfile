@@ -13,19 +13,16 @@ pipeline {
 
 
   stages {
-    stage('Step 1') {
+    stage('stage1') {
       steps {
         echo "привет СБЕР, меня зовут ${ФИО} и я хочу у вас работать"
-        sh 'echo "привет СБЕР, меня зовут ${ФИО} и я хочу у вас работать"'
       }
     }
-    stage('Step 2') {
-      steps {
-        string(description: 'Поле ввода ФИО', name: 'ФИО', defaultValue: 'Выдрин Сергей Евгеньевич')
-        echo "Привет СБЕР, меня зовут ${P_N}"
+    stage ('stage1'){
+      input{
+      message "Принять на работу?"
       }
     }
-  }
   post {
       always {
         echo 'post'
