@@ -18,14 +18,17 @@ pipeline {
         echo "привет СБЕР, меня зовут ${ФИО} и я хочу у вас работать"
       }
     }
-    stage ('stage1'){
+    
+    stage ('stage2'){
       input{
       message "Принять на работу?"
       }
     }
-  post {
+    
+    post {
       always {
         echo 'post'
       }
+    }
   }
 }
