@@ -6,14 +6,16 @@ pipeline {
     P_N = "trash"
   }
   parameters {
-    string(description: 'Parameter', name: 'PARAMETER_VARIABLE', defaultValue: 'ParameterTEST')
+    string(description: 'Поле ввода ФИО', name: 'ФИО', defaultValue: 'Выдрин Сергей Евгеньевич')
+    string(description: 'Поле ввода почты e-mail', name: 'Email', defaultValue: 'seryi01.vydrin@yandex.ru')
+    string(description: 'Поле ввода слейва на котором выполнится задание(псевдовыбор)', name: 'Slave', defaultValue: 'Example 1')
   }
 
 
   stages {
     stage('Step 1') {
       steps {
-        echo 'Привет СБЕР, ${P_N} ${Parameter}'
+        echo "привет СБЕР, меня зовут ${ФИО} и я хочу у вас работать"
       }
     }
     stage('Step 2') {
