@@ -1,6 +1,5 @@
 echo "Hello, i am junior, remember it's please..."
 pipeline {
-  
   agent any
   
   environment{
@@ -19,7 +18,7 @@ pipeline {
     }
     stage('Step 2') {
       steps {
-        echo 'Привет СБЕР, меня зовут "${FIO}"'
+        echo "Привет СБЕР, меня зовут ${P_N}"
       }
     }
   }
