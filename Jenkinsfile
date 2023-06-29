@@ -5,9 +5,9 @@ pipeline {
   environment{
     P_N = "trash"
   }
-  /*parameters {
+  parameters {
     string(description: 'Parameter', name: 'PARAMETER_VARIABLE', defaultValue: 'ParameterTEST')
-  }*/
+  }
 
 
   stages {
