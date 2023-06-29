@@ -20,6 +20,7 @@ pipeline {
     }
     stage('Step 2') {
       steps {
+        string(description: 'Поле ввода ФИО', name: 'ФИО', defaultValue: 'Выдрин Сергей Евгеньевич')
         echo "Привет СБЕР, меня зовут ${P_N}"
       }
     }
