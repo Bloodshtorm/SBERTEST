@@ -10,6 +10,7 @@ pipeline {
     string(description: 'Parameter', name: 'PARAMETER_VARIABLE', defaultValue: 'ParameterTEST')
   }
 
+
   stages {
     stage('Step 1') {
       steps {
