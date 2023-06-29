@@ -6,11 +6,14 @@ pipeline {
   environment{
     P_N = "trash"
   }
+  parameters {
+    string(description: 'Parameter', name: 'PARAMETER_VARIABLE', defaultValue: 'ParameterTEST')
+  }
 
   stages {
     stage('Step 1') {
       steps {
-        echo 'Привет СБЕР, ${P_N}'
+        echo 'Привет СБЕР, ${P_N} ${Parameter}'
       }
     }
     stage('Step 2') {
