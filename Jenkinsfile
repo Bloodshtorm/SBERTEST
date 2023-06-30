@@ -24,7 +24,8 @@ pipeline {
         steps {
             script {
                 def ApprovalDelay = input id: 'Deploy', message: 'принять на работу/отказать', parameters: [choice(choices: ['принять на работу', 'отказать'], description: 'Каково ваше решение?', name: 'ApprovalDelay')]
-                sleep time: ApprovalDelay.toString(), unit: 'Approv'
+                /*sleep time: ApprovalDelay.toString(), unit: 'Approv'*/
+                echo ApprovalDelay.toString()
             }
         }
     }
