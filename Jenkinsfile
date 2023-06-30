@@ -1,7 +1,7 @@
 echo "Hello, i am junior, remember it's please..."
 //Создать в Jenkins джобу и написать скрипт для неё (декларативный groovy pipeline скрипт):
 pipeline {
-  agent any
+  //agent any
   
   environment{
     RESULT_APPROVAL = null
