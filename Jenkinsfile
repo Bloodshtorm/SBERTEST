@@ -52,7 +52,8 @@ pipeline {
         script {
           label 'my-defined-label'
           echo $RESULT_APPROVAL.toString()
-          mail to: 'seryi01.vydrin@yandex.ru', subject: "Failed Pipeline: ${currentBuild.fullDisplayName}", body: "Something is wrong with"
+          //не знаю как иначе это реализовать, пока вот так:
+          mail to: ${EMAIL}, subject: "${ФИО} вам сообщение от СБЕРА", body: "RESULT_APPROVAL"
         }
       }
     }
