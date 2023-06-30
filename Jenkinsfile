@@ -4,7 +4,7 @@ pipeline {
   agent any
   
   environment{
-    P_N = "trash"
+    result = none
   }
 //Параметры для запуска джобы
 //Поле ввода ФИО
@@ -30,6 +30,11 @@ pipeline {
             script {
                 def ApprovalDelay = input id: 'Deploy', message: 'Форму запроса, выберите один из вариантов', parameters: [choice(choices: ['принять на работу', 'отказать'], description: 'Каково ваше решение?', name: 'Принять на работу или отказать?')]
                 echo ApprovalDelay.toString()
+                if (ApprovalDelay.toString() == 'принять на работу') {
+                  echo "ок"
+                } else {
+                  echo "не ок"
+                }
             }
         }
     }
