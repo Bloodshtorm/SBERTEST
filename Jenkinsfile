@@ -32,13 +32,14 @@ pipeline {
                 echo ApprovalDelay.toString()
                 if (ApprovalDelay.toString() == 'принять на работу') {
                   //По флагу «принять на работу» должно пойти дальше на следующий стейдж
-                  $RESULT_APPROVAL='принять на работу'
+                  $RESULT_APPROVAL="${ФИО} принят"
                 } else {
                   //По флагу «отказать» должно завершить работу джобы и повесить на билд бейдж о том, что кандидату «ФИО» отказано
                   script {
-                    currentBuild.displayName = 'кандидату ${ФИО} отказано'
+                    $RESULT_APPROVAL = "кандидату ${ФИО} отказано"
+                    currentBuild.displayName = $RESULT_APPROVAL
                     currentBuild.result = 'ABORTED'
-                    error("кандидату ${ФИО} отказано")
+                    error("$RESULT_APPROVAL")
                     return
                   }
                 }
