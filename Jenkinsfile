@@ -51,9 +51,9 @@ pipeline {
       steps {
         script {
           label 'my-defined-label'
-          echo $RESULT_APPROVAL.toString()
+          echo "${RESULT_APPROVAL}"
           //не знаю как иначе это реализовать, пока вот так:
-          mail to: ${EMAIL}, subject: "${ФИО} вам сообщение от СБЕРА", body: "RESULT_APPROVAL"
+          mail to: ${EMAIL}, subject: "${ФИО} вам сообщение от СБЕРА", body: "${RESULT_APPROVAL}"
         }
       }
     }
