@@ -36,8 +36,12 @@ pipeline {
                 } else {
                   //По флагу «отказать» должно завершить работу джобы и повесить на билд бейдж о том, что кандидату «ФИО» отказано
                   echo "не ок"
-                  currentBuild.result = 'SUCCESS'
-                  return
+                  //currentBuild.result = 'SUCCESS'
+                  //return
+                  script {
+                    currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
+                    sleep(1)   // Interrupt is not blocking and does not take effect immediately.
+                  }
                 }
             }
         }
@@ -46,7 +50,7 @@ pipeline {
     stage('stage3') {
         steps {
             script {
-                echo ApprovalDelay.toString()
+                echo $RESULT_APPROVAL.toString()
             }
         }
     }
