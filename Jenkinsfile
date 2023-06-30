@@ -33,6 +33,7 @@ pipeline {
             if (ApprovalDelay.toString() == 'принять на работу') {
               //По флагу «принять на работу» должно пойти дальше на следующий стейдж
               $RESULT_APPROVAL="${ФИО} принят"
+              echo "debug1"
             } else {
               //По флагу «отказать» должно завершить работу джобы и повесить на билд бейдж о том, что кандидату «ФИО» отказано
               script {
@@ -50,7 +51,7 @@ pipeline {
     stage('stage3') {
       steps {
         script {
-          label 'my-defined-label'
+          echo "debug2"
           echo "${RESULT_APPROVAL}"
           //не знаю как иначе это реализовать, пока вот так:
           mail to: ${EMAIL}, subject: "${ФИО} вам сообщение от СБЕРА", body: "${RESULT_APPROVAL}"
