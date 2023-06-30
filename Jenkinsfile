@@ -23,17 +23,8 @@ pipeline {
         agent none
         steps {
             script {
-                def deploymentDelay = input id: 'Deploy', message: 'Deploy to production?', submitter: 'rkivisto,admin', parameters: [choice(choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'], description: 'Hours to delay deployment?', name: 'deploymentDelay')]
-                sleep time: deploymentDelay.toInteger(), unit: 'HOURS'
-            }
-        }
-    }
-    stage('Deploy') {
-        agent any
-        steps {
-            // uses https://plugins.jenkins.io/lockable-resources
-            lock(resource: 'deployApplication'){
-                echo 'Deploying...'
+                def ApprovalDelay = input id: 'Deploy', message: 'принять на работу/отказать', parameters: [choice(choices: ['принять на работу', 'отказать'], description: 'Каково ваше решение?', name: 'ApprovalDelay')]
+                sleep time: ApprovalDelay.toString(), unit: 'Approv'
             }
         }
     }
