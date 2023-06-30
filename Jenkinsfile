@@ -25,8 +25,7 @@ pipeline {
     //Второй стейдж апррув: – должно появиться окно ввода «принять на работу»/«отказать»
     stage('stage2') {
         // no agent, so executors are not used up when waiting for approvals
-        //agent none
-        agent standalone
+        agent none
         steps {
           script {
             def ApprovalDelay = input id: 'Deploy', message: 'Форму запроса, выберите один из вариантов', parameters: [choice(choices: ['принять на работу', 'отказать'], description: 'Каково ваше решение?', name: 'Принять на работу или отказать?')]
