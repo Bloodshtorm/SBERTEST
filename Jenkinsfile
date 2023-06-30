@@ -23,7 +23,7 @@ pipeline {
         agent none
         steps {
             script {
-                def ApprovalDelay = input id: 'Deploy', message: 'принять на работу/отказать', parameters: [choice(choices: ['принять на работу', 'отказать'], description: 'Каково ваше решение?', name: 'ApprovalDelay')]
+                def ApprovalDelay = input id: 'Deploy', message: 'принять на работу/отказать', parameters: [choice(choices: ['принять на работу', 'отказать'], description: 'Каково ваше решение?', name: 'ApprovalDelay21')]
                 /*sleep time: ApprovalDelay.toString(), unit: 'Approv'*/
                 echo ApprovalDelay.toString()
             }
