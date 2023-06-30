@@ -19,8 +19,10 @@ pipeline {
       }
     }
     stage ('stage2') {
-      input{
-      message "Принять на работу?"
+      steps {
+        input{
+        message "Принять на работу?"
+        }
       }
     }
   }
