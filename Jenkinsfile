@@ -13,7 +13,12 @@ pipeline {
   parameters {
     string(description: 'Поле ввода ФИО', name: 'ФИО', defaultValue: 'Выдрин Сергей Евгеньевич')
     string(description: 'Поле ввода почты e-mail', name: 'EMAIL', defaultValue: 'seryi01.vydrin@yandex.ru')
-    string(description: 'Поле ввода слейва на котором выполнится задание(псевдовыбор)', name: 'SlAVE', defaultValue: 'Example 1')
+    string(description: 'Поле ввода слейва на котором выполнится задание(псевдовыбор)', name: 'SlAVE', defaultValue: 'standalone_builder')
+  }
+  agent {
+    node {
+      label 'standalone_builder' 
+    }
   }
   //Первый стейдж: вывод в лог эхо «привет СБЕР, меня зовут «ФИО» и я хочу у вас работать»
   stages {
