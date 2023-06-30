@@ -4,7 +4,7 @@ pipeline {
   agent any
   
   environment{
-    result = none
+    RESULT = null
   }
 //Параметры для запуска джобы
 //Поле ввода ФИО
@@ -12,8 +12,8 @@ pipeline {
 //Поле ввода слейва на котором выполнится задание
   parameters {
     string(description: 'Поле ввода ФИО', name: 'ФИО', defaultValue: 'Выдрин Сергей Евгеньевич')
-    string(description: 'Поле ввода почты e-mail', name: 'Email', defaultValue: 'seryi01.vydrin@yandex.ru')
-    string(description: 'Поле ввода слейва на котором выполнится задание(псевдовыбор)', name: 'Slave', defaultValue: 'Example 1')
+    string(description: 'Поле ввода почты e-mail', name: 'EMAIL', defaultValue: 'seryi01.vydrin@yandex.ru')
+    string(description: 'Поле ввода слейва на котором выполнится задание(псевдовыбор)', name: 'SlAVE', defaultValue: 'Example 1')
   }
   //Первый стейдж: вывод в лог эхо «привет СБЕР, меня зовут «ФИО» и я хочу у вас работать»
   stages {
