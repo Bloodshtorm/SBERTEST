@@ -36,6 +36,7 @@ pipeline {
                 } else {
                   //По флагу «отказать» должно завершить работу джобы и повесить на билд бейдж о том, что кандидату «ФИО» отказано
                   script {
+                    currentBuild.displayName = 'кандидату ${ФИО} отказано'
                     currentBuild.result = 'ABORTED'
                     error("кандидату ${ФИО} отказано")
                     return
