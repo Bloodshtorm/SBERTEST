@@ -35,11 +35,10 @@ pipeline {
                   $RESULT_APPROVAL='принять на работу'
                 } else {
                   //По флагу «отказать» должно завершить работу джобы и повесить на билд бейдж о том, что кандидату «ФИО» отказано
-                  //currentBuild.result = 'SUCCESS'
-                  //return
                   script {
-                    currentBuild.result = 'SUCCESS'
-                    error("Aborting the build.")
+                    currentBuild.result = 'ABORTED'
+                    error("кандидату ${ФИО} отказано")
+                    return
                   }
                 }
             }
