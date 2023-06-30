@@ -4,7 +4,7 @@ pipeline {
   agent any
   
   environment{
-    RESULT = null
+    RESULT_APPROVAL = null
   }
 //Параметры для запуска джобы
 //Поле ввода ФИО
@@ -31,13 +31,18 @@ pipeline {
                 def ApprovalDelay = input id: 'Deploy', message: 'Форму запроса, выберите один из вариантов', parameters: [choice(choices: ['принять на работу', 'отказать'], description: 'Каково ваше решение?', name: 'Принять на работу или отказать?')]
                 echo ApprovalDelay.toString()
                 if (ApprovalDelay.toString() == 'принять на работу') {
-                  echo "ок"
+                  //По флагу «принять на работу» должно пойти дальше на следующий стейдж
+                  $RESULT_APPROVAL='принять на работу'
                 } else {
+                  //По флагу «отказать» должно завершить работу джобы и повесить на билд бейдж о том, что кандидату «ФИО» отказано
                   echo "не ок"
+                  currentBuild.result = 'SUCCESS'
+                  return
                 }
             }
         }
     }
+    //Третий стейдж – отправить письмо на «e-mail» с уведомлением. Текст: «ФИО» принят.
     stage('stage3') {
         steps {
             script {
