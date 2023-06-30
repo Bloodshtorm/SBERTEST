@@ -27,37 +27,39 @@ pipeline {
         // no agent, so executors are not used up when waiting for approvals
         agent none
         steps {
-            script {
-                def ApprovalDelay = input id: 'Deploy', message: 'Форму запроса, выберите один из вариантов', parameters: [choice(choices: ['принять на работу', 'отказать'], description: 'Каково ваше решение?', name: 'Принять на работу или отказать?')]
-                echo ApprovalDelay.toString()
-                if (ApprovalDelay.toString() == 'принять на работу') {
-                  //По флагу «принять на работу» должно пойти дальше на следующий стейдж
-                  $RESULT_APPROVAL="${ФИО} принят"
-                } else {
-                  //По флагу «отказать» должно завершить работу джобы и повесить на билд бейдж о том, что кандидату «ФИО» отказано
-                  script {
-                    $RESULT_APPROVAL = "кандидату ${ФИО} отказано"
-                    currentBuild.displayName = $RESULT_APPROVAL
-                    currentBuild.result = 'ABORTED'
-                    error("$RESULT_APPROVAL")
-                    return
-                  }
-                }
+          script {
+            def ApprovalDelay = input id: 'Deploy', message: 'Форму запроса, выберите один из вариантов', parameters: [choice(choices: ['принять на работу', 'отказать'], description: 'Каково ваше решение?', name: 'Принять на работу или отказать?')]
+            echo ApprovalDelay.toString()
+            if (ApprovalDelay.toString() == 'принять на работу') {
+              //По флагу «принять на работу» должно пойти дальше на следующий стейдж
+              $RESULT_APPROVAL="${ФИО} принят"
+            } else {
+              //По флагу «отказать» должно завершить работу джобы и повесить на билд бейдж о том, что кандидату «ФИО» отказано
+              script {
+                $RESULT_APPROVAL = "кандидату ${ФИО} отказано"
+                currentBuild.displayName = $RESULT_APPROVAL
+                currentBuild.result = 'ABORTED'
+                error("$RESULT_APPROVAL")
+                return
+              }
             }
+          }
         }
     }
     //Третий стейдж – отправить письмо на «e-mail» с уведомлением. Текст: «ФИО» принят.
     stage('stage3') {
-        steps {
-            script {
-                echo $RESULT_APPROVAL.toString()
-            }
+      steps {
+        script {
+          label 'my-defined-label'
+          echo $RESULT_APPROVAL.toString()
+          mail to: 'seryi01.vydrin@yandex.ru', subject: "Failed Pipeline: ${currentBuild.fullDisplayName}", body: "Something is wrong with"
         }
+      }
     }
   }
   post {
     always {
-    echo 'post'
+    echo 'Done!'
     }
   }
 }
