@@ -35,14 +35,14 @@ pipeline {
               $RESULT_APPROVAL="${ФИО} принят"
             } else {
               //По флагу «отказать» должно завершить работу джобы и повесить на билд бейдж о том, что кандидату «ФИО» отказано
-              //script {
+              script {
                 $RESULT_APPROVAL = "кандидату ${ФИО} отказано"
                 currentBuild.displayName = $RESULT_APPROVAL
                 currentBuild.result = 'ABORTED'
                 error("$RESULT_APPROVAL")
                 return
               }
-            //}
+            }
           }
         }
     }
